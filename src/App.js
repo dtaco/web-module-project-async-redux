@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 import GifList from './components/GifList';
 import GifForm from './components/GifForm';
 
+import { getGifs } from './actions/index';
 
 function App(props) {
   
-const { loading, error } = props;
+const { loading, error, getGifs } = props;
+
+useEffect(() => {
+  getGifs();
+}, []);
 
 
   return (
@@ -31,4 +36,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { getGifs })(App);
